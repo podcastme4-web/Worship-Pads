@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worship Pads | Ambient Pads for Live Worship & Sound Design</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f4ff',
+                            100: '#d9e2ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#1e1b4b',
+                            950: '#0f0e26',
+                        },
+                        ambient: {
+                            glow: '#818cf8',
+                            purple: '#a855f7',
+                            cyan: '#06b6d4',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #09090b;
+            color: #f4f4f5;
+            overflow-x: hidden;
+        }
+        /* Custom Ambient Background Elements */
+        .glow-bg-1 {
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
+        }
+        .glow-bg-2 {
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+        }
+        .glass-card {
+            background: rgba(24, 24, 27, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.25);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Ambient Glowing Background Spheres -->
+    <div class="fixed top-0 left-1/4 w-[600px] h-[600px] glow-bg-1 rounded-full pointer-events-none -z-10 blur-3xl animate-pulse-slow"></div>
+    <div class="fixed bottom-1/4 right-1/4 w-[500px] h-[500px] glow-bg-2 rounded-full pointer-events-none -z-10 blur-3xl"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 glass-card border-b border-white/10 px-4 lg:px-8 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Brand Logo / Name -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-ambient-purple flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform duration-300">
+                    <i class="fa-solid font-bold fa-music"></i>
+                </div>
+                <div>
+                    <span class="font-extrabold text-xl tracking-tight text-white block">Worship Pads</span>
+                    <span class="text-[10px] text-zinc-400 font-medium tracking-wider uppercase block -mt-1">By Peter Junior</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
+                <a href="#features" class="hover:text-white transition-colors">Features</a>
+                <a href="#platforms" class="hover:text-white transition-colors">Platforms</a>
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+            </div>
+
+            <!-- Primary Web Link Button -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="https://podcastme4-web.github.io/WorshipPads/" target="_blank" rel="noopener noreferrer" 
+                   class="relative group overflow-hidden rounded-full p-[1px] focus:outline-none">
+                    <span class="absolute inset-0 bg-gradient-to-r from-brand-500 via-ambient-purple to-ambient-cyan rounded-full"></span>
+                    <span class="relative px-5 py-2.5 rounded-full bg-zinc-950 flex items-center gap-2 text-sm font-semibold text-white transition-all duration-300 group-hover:bg-opacity-80">
+                        <i class="fa-solid fa-play text-brand-500 group-hover:text-white transition-colors"></i> Launch Web App
+                    </span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-zinc-300 hover:text-white p-2 text-xl focus:outline-none" aria-label="Toggle Navigation Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden md:hidden mt-4 pt-4 border-t border-white/10 flex flex-col gap-4 text-center">
+            <a href="#features" class="text-zinc-300 hover:text-white py-1">Features</a>
+            <a href="#platforms" class="text-zinc-300 hover:text-white py-1">Platforms</a>
+            <a href="#about" class="text-zinc-300 hover:text-white py-1">About</a>
+            <a href="https://podcastme4-web.github.io/WorshipPads/" target="_blank" rel="noopener noreferrer" 
+               class="w-full py-3 rounded-xl bg-gradient-to-r from-brand-600 to-ambient-purple font-semibold text-white shadow-lg flex items-center justify-center gap-2">
+                <i class="fa-solid fa-play"></i> Launch Web App
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-12 pb-20 lg:pt-24 lg:pb-32 px-4 lg:px-8 max-w-7xl mx-auto text-center">
+        <!-- Status Pill -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-white/10 text-xs md:text-sm text-zinc-300 mb-8 animate-float">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>Live Web Edition Now Available</span>
+        </div>
+
+        <!-- Headline & Subtitle -->
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+            Atmospheric Pad Layers <br class="hidden sm:block">
+            <span class="bg-gradient-to-r from-brand-500 via-ambient-purple to-ambient-cyan bg-clip-text text-transparent">For Live Worship & Sound</span>
+        </h1>
+        <p class="max-w-2xl mx-auto text-base sm:text-lg lg:text-xl text-zinc-400 mb-10 leading-relaxed">
+            High-quality continuous ambient pads engineered to fill the space in your live church worship services, solo practice sessions, and sound design workflows.
+        </p>
+
+        <!-- CTA Buttons Group -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto mb-16">
+            <!-- PRIMARY CTA (Web Redirect) -->
+            <a href="https://podcastme4-web.github.io/WorshipPads/" target="_blank" rel="noopener noreferrer"
+               class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-600 to-ambient-purple text-white font-bold text-lg shadow-xl shadow-brand-500/25 hover:shadow-brand-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-3">
+                <i class="fa-solid fa-globe text-xl"></i>
+                <span>Play Online in Browser</span>
+            </a>
+        </div>
+
+        <!-- Native Store Links Row -->
+        <div class="pt-8 border-t border-white/10 max-w-3xl mx-auto">
+            <p class="text-xs uppercase tracking-widest text-zinc-400 font-semibold mb-6">Or Download Native Mobile & Desktop Apps</p>
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <!-- Google Play Store Button -->
+                <a href="#" onclick="alert('Google Play Store link will be updated once production review completes!')" class="glass-card px-5 py-3 rounded-xl flex items-center gap-3 hover:border-brand-500/50 transition-all duration-300 group">
+                    <i class="fa-brands fa-google-play text-2xl text-emerald-400 group-hover:scale-110 transition-transform"></i>
+                    <div class="text-left">
+                        <div class="text-[10px] uppercase text-zinc-400 font-medium">Get it on</div>
+                        <div class="text-sm font-bold text-white">Google Play</div>
+                    </div>
+                </a>
+
+                <!-- Microsoft Store Button -->
+                <a href="#" onclick="alert('Search Worship Pads on Microsoft Store app or Windows PC!')" class="glass-card px-5 py-3 rounded-xl flex items-center gap-3 hover:border-brand-500/50 transition-all duration-300 group">
+                    <i class="fa-brands fa-microsoft text-2xl text-cyan-400 group-hover:scale-110 transition-transform"></i>
+                    <div class="text-left">
+                        <div class="text-[10px] uppercase text-zinc-400 font-medium">Download for</div>
+                        <div class="text-sm font-bold text-white">Microsoft Store</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="py-20 px-4 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Crafted for Worship Musicians</h2>
+            <p class="text-zinc-400 max-w-xl mx-auto">Designed specifically to provide smooth key transitions and seamless soundscapes during live ministry.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Feature 1 -->
+            <div class="glass-card p-6 rounded-2xl transition-all duration-300">
+                <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-500 flex items-center justify-center text-xl mb-6">
+                    <i class="fa-solid fa-sliders"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Rich Sound Engine</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed">Deep, warm, and carefully crafted ambient pads designed to fill the mix without overwhelming instruments.</p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="glass-card p-6 rounded-2xl transition-all duration-300">
+                <div class="w-12 h-12 rounded-xl bg-ambient-purple/10 border border-ambient-purple/20 text-ambient-purple flex items-center justify-center text-xl mb-6">
+                    <i class="fa-solid fa-desktop"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Cross-Platform</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed">Run seamlessly on Google Chrome web browsers, Windows PC desktop, and Android mobile devices.</p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="glass-card p-6 rounded-2xl transition-all duration-300">
+                <div class="w-12 h-12 rounded-xl bg-ambient-cyan/10 border border-ambient-cyan/20 text-ambient-cyan flex items-center justify-center text-xl mb-6">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Instant Response</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed">Low-latency playback engine ensuring instant response when switching keys or toggling pads during live sets.</p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="glass-card p-6 rounded-2xl transition-all duration-300">
+                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-6">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Clean UI Layout</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed">Simple, distraction-free interface built for quick navigation under dark sanctuary or stage lighting conditions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLATFORM AVAILABILITY SECTION -->
+    <section id="platforms" class="py-20 px-4 lg:px-8 max-w-7xl mx-auto">
+        <div class="glass-card rounded-3xl p-8 lg:p-12 relative overflow-hidden border border-white/10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-brand-500 font-semibold text-sm uppercase tracking-wider block mb-2">Zero Installation Required</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-6">Use It Anywhere, Anytime</h2>
+                    <p class="text-zinc-300 text-base lg:text-lg mb-8 leading-relaxed">
+                        Whether you're rehearsing at home on a laptop or running worship on stage from a church desktop computer, 
+                        <strong>Worship Pads</strong> gives you immediate access through any modern web browser.
+                    </p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-zinc-300">
+                            <i class="fa-solid fa-circle-check text-brand-500"></i>
+                            <span>No setup or complex app store downloads necessary</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-zinc-300">
+                            <i class="fa-solid fa-circle-check text-brand-500"></i>
+                            <span>Works on Windows, Mac, Linux, and Chromebooks</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-zinc-300">
+                            <i class="fa-solid fa-circle-check text-brand-500"></i>
+                            <span>Progressive Web App support—pin it directly to your home screen</span>
+                        </li>
+                    </ul>
+
+                    <a href="https://podcastme4-web.github.io/WorshipPads/" target="_blank" rel="noopener noreferrer" 
+                       class="inline-flex items-center gap-3 px-6 py-3.5 rounded-xl bg-white text-zinc-950 font-bold hover:bg-zinc-200 transition-colors">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Web Version Now
+                    </a>
+                </div>
+
+                <!-- Web Launch Preview Box -->
+                <div class="glass-card p-6 rounded-2xl border border-white/10 text-center relative group">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-600 to-ambient-purple mx-auto flex items-center justify-center text-white text-2xl shadow-xl shadow-brand-500/20 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Worship Pads Web</h3>
+                    <p class="text-zinc-400 text-sm mb-6">`https://podcastme4-web.github.io/WorshipPads/`</p>
+                    <a href="https://podcastme4-web.github.io/WorshipPads/" target="_blank" rel="noopener noreferrer" 
+                       class="block w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold transition-colors">
+                        Launch Live App
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer id="about" class="border-t border-white/10 pt-16 pb-12 px-4 lg:px-8 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div>
+                <a href="#" class="font-bold text-lg text-white block mb-1">Worship Pads</a>
+                <p class="text-xs text-zinc-400">Created with passion for worship music by <span class="text-zinc-200 font-semibold">Peter Junior</span>.</p>
+            </div>
+            
+            <div class="flex items-center gap-6 text-sm text-zinc-400">
+                <a href="https://podcastme4-web.github.io/WorshipPads/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Web App</a>
+                <a href="#features" class="hover:text-white transition-colors">Features</a>
+                <a href="#platforms" class="hover:text-white transition-colors">Platforms</a>
+            </div>
+        </div>
+
+        <div class="mt-12 pt-6 border-t border-white/5 text-center text-xs text-zinc-400">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> Worship Pads by Peter Junior. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu Toggle -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
